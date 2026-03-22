@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  background: #0a0a0f;
+  color: white;
+  font-family: 'JetBrains Mono', monospace;
+  min-height: 100vh;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ── CodeMirror base ─────────────────────────────────────────── */
+.cm-editor {
+  background: transparent !important;
+  font-family: 'JetBrains Mono', monospace !important;
+}
+.cm-editor.cm-focused {
+  outline: none !important;
+}
+.cm-scroller {
+  font-family: 'JetBrains Mono', monospace !important;
+}
+.cm-content {
+  padding: 0 !important;
+}
+.cm-line {
+  padding-left: 0 !important;
+  transition: opacity 0.2s ease;
+}
+
+/* ── Gutter (line numbers) smooth animation ──────────────────── */
+.cm-gutters {
+  background: transparent !important;
+  border-right: none !important;
+  max-width: 60px;
+  opacity: 1;
+  transition: max-width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+              padding 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Applied via wrapper class when line numbers are OFF */
+.hide-line-numbers .cm-gutters {
+  max-width: 0 !important;
+  opacity: 0 !important;
+  padding: 0 !important;
+}
+
+/* ── Theme fade-in when theme changes ────────────────────────── */
+.cm-editor {
+  transition: background 0.3s ease;
+}
+
+/* ── Editor content fade-in on mount ────────────────────────── */
+@keyframes editorFadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.editor-fade-in {
+  animation: editorFadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
