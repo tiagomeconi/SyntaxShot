@@ -1,6 +1,0 @@
-{
-  "framework": "nextjs",
-  "installCommand": "cd SyntaxShot && npm install",
-  "buildCommand": "cd SyntaxShot && npm run build",
-  "outputDirectory": "SyntaxShot/.next"
-}
