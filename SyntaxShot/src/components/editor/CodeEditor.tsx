@@ -24,6 +24,7 @@ import { wast }       from '@codemirror/lang-wast'
 import { liquid }     from '@codemirror/lang-liquid'
 // ── Community lang packages ───────────────────────────────────────────────────
 import { elixir }   from 'codemirror-lang-elixir'
+// @ts-expect-error - no types available
 import { parser as solidityParser } from 'codemirror-lang-solidity'
 import { graphqlLanguageSupport }   from 'cm6-graphql'
 // ── Legacy modes (StreamLanguage wrappers) ────────────────────────────────────
@@ -35,7 +36,7 @@ import { haskell }     from '@codemirror/legacy-modes/mode/haskell'
 import { erlang }      from '@codemirror/legacy-modes/mode/erlang'
 import { julia }       from '@codemirror/legacy-modes/mode/julia'
 import { diff }        from '@codemirror/legacy-modes/mode/diff'
-import { dockerfile }  from '@codemirror/legacy-modes/mode/dockerfile'
+import { dockerFile }  from '@codemirror/legacy-modes/mode/dockerfile'
 import { clojure }     from '@codemirror/legacy-modes/mode/clojure'
 import { commonLisp }  from '@codemirror/legacy-modes/mode/commonlisp'
 import { crystal }     from '@codemirror/legacy-modes/mode/crystal'
@@ -68,7 +69,7 @@ const legacy = (mode: object) => () => StreamLanguage.define(mode as Parameters<
 const solidityLang = () => new LanguageSupport(LRLanguage.define({ parser: solidityParser }))
 
 // ── Language map ──────────────────────────────────────────────────────────────
-const languageExtensions: Record<Language, () => LanguageSupport | ReturnType<typeof javascript>> = {
+const languageExtensions: Record<Language, () => any> = {
   // ── Plaintext / no highlight
   plaintext:   () => new LanguageSupport(LRLanguage.define({ parser: solidityParser, languageData: {} }), []),
 
@@ -130,7 +131,7 @@ const languageExtensions: Record<Language, () => LanguageSupport | ReturnType<ty
   // ── Shell / ops
   bash:        legacy(shell),
   powershell:  legacy(powerShell),
-  dockerfile:  legacy(dockerfile),
+  dockerfile:  legacy(dockerFile),
   hcl:         legacy(toml),   // closest available
 
   // ── Data / config
